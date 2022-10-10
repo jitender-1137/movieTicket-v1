@@ -1,9 +1,9 @@
 package com.movie.movieTicket.controller;
 
+import com.movie.movieTicket.data.co.UserCo;
 import com.movie.movieTicket.dto.ResponseDto;
 import com.movie.movieTicket.dto.SuccessResponseDto;
 import com.movie.movieTicket.dto.UserDto;
-import com.movie.movieTicket.model.User;
 import com.movie.movieTicket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -15,23 +15,24 @@ import java.util.List;
 @RestController
 @Validated
 @RequestMapping("/v1")
+@CrossOrigin
 public class UserController {
 
     @Autowired
     UserService userService;
 
     @PostMapping("/addUser")
-    public ResponseDto addUser(@Valid @RequestBody UserDto userDto) {
+    public ResponseDto addUser(@Valid @RequestBody UserCo userCo) {
 
-        User user = userService.addNewUser(userDto);
+        UserDto userDto = userService.addNewUser(userCo);
 
-        return new SuccessResponseDto(user, "user add successfully");
+        return new SuccessResponseDto(userDto, "user add successfully");
     }
 
     @GetMapping("/get")
     public ResponseDto getUser() {
-        List<User> user = userService.getAll();
-        return new SuccessResponseDto(user, "fetch successfully ", Long.valueOf(user.size()));
+        List<UserDto> userDto = userService.getAll();
+        return new SuccessResponseDto(userDto, "fetch successfully ", Long.valueOf(userDto.size()));
 
     }
 }

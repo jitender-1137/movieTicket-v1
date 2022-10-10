@@ -3,6 +3,7 @@ package com.movie.movieTicket.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Getter
@@ -19,8 +20,10 @@ public class User {
     private String name;
     private String email;
     private String username;
+    private Date dob;
     private String password;
     private Long createdAt;
     private Long updatedAt;
+    private boolean termsAndConditions;
 
 }
